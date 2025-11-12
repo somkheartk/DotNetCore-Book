@@ -188,7 +188,9 @@ namespace ProductsAPI.Controllers
         public async Task<ActionResult<ApiResponse<IEnumerable<ProductResponseDto>>>> SearchProducts(
             [FromQuery] string keyword)
         {
-            _logger.LogInformation("GET /api/products/search?keyword={Keyword} - ค้นหาสินค้า", keyword);
+            // Sanitize keyword for logging to prevent log forging
+            var sanitizedKeyword = keyword?.Replace("\n", "").Replace("\r", "") ?? "";
+            _logger.LogInformation("GET /api/products/search?keyword={Keyword} - ค้นหาสินค้า", sanitizedKeyword);
 
             if (string.IsNullOrWhiteSpace(keyword))
             {
@@ -219,7 +221,9 @@ namespace ProductsAPI.Controllers
         public async Task<ActionResult<ApiResponse<IEnumerable<ProductResponseDto>>>> GetProductsByCategory(
             string category)
         {
-            _logger.LogInformation("GET /api/products/category/{Category} - ดึงสินค้าตามหมวดหมู่", category);
+            // Sanitize category for logging to prevent log forging
+            var sanitizedCategory = category?.Replace("\n", "").Replace("\r", "") ?? "";
+            _logger.LogInformation("GET /api/products/category/{Category} - ดึงสินค้าตามหมวดหมู่", sanitizedCategory);
 
             var products = await _productService.GetProductsByCategoryAsync(category);
             var response = new ApiResponse<IEnumerable<ProductResponseDto>>(

@@ -37,7 +37,9 @@ namespace ProductsAPI.Services
 
         public async Task<ProductResponseDto> CreateProductAsync(CreateProductDto createDto)
         {
-            _logger.LogInformation("กำลังสร้างสินค้าใหม่: {ProductName}", createDto.Name);
+            // Sanitize product name for logging to prevent log forging
+            var sanitizedName = createDto.Name?.Replace("\n", "").Replace("\r", "") ?? "";
+            _logger.LogInformation("กำลังสร้างสินค้าใหม่: {ProductName}", sanitizedName);
             
             // แปลง DTO เป็น Entity
             var product = new Product
@@ -110,7 +112,9 @@ namespace ProductsAPI.Services
 
         public async Task<IEnumerable<ProductResponseDto>> SearchProductsAsync(string keyword)
         {
-            _logger.LogInformation("กำลังค้นหาสินค้าด้วยคำค้นหา: {Keyword}", keyword);
+            // Sanitize keyword for logging to prevent log forging
+            var sanitizedKeyword = keyword?.Replace("\n", "").Replace("\r", "") ?? "";
+            _logger.LogInformation("กำลังค้นหาสินค้าด้วยคำค้นหา: {Keyword}", sanitizedKeyword);
             
             var products = await _repository.SearchAsync(keyword);
             return products.Select(MapToResponseDto);
@@ -118,7 +122,9 @@ namespace ProductsAPI.Services
 
         public async Task<IEnumerable<ProductResponseDto>> GetProductsByCategoryAsync(string category)
         {
-            _logger.LogInformation("กำลังดึงสินค้าในหมวดหมู่: {Category}", category);
+            // Sanitize category for logging to prevent log forging
+            var sanitizedCategory = category?.Replace("\n", "").Replace("\r", "") ?? "";
+            _logger.LogInformation("กำลังดึงสินค้าในหมวดหมู่: {Category}", sanitizedCategory);
             
             var products = await _repository.GetByCategoryAsync(category);
             return products.Select(MapToResponseDto);
