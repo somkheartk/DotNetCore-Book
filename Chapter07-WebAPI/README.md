@@ -1,5 +1,29 @@
 # บทที่ 7: Web API ด้วย ASP.NET Core
 
+## 📚 เนื้อหาในบทนี้
+
+บทนี้ครอบคลุมการสร้าง Web API แบบมืออาชีพด้วย ASP.NET Core พร้อม Best Practices ที่ใช้งานจริง
+
+### 📖 ทฤษฎี (ในเอกสารนี้)
+- RESTful API คืออะไร
+- HTTP Methods และ Status Codes  
+- การสร้าง Web API พื้นฐาน
+- Authentication และ Authorization
+- CORS, Rate Limiting, API Versioning
+
+### 💻 โปรเจคตัวอย่าง (ProductsAPI/)
+- **โปรเจค ProductsAPI** - Web API แบบมืออาชีพพร้อม Best Practices
+  - Repository Pattern
+  - Service Layer Pattern
+  - FluentValidation
+  - Global Exception Handling
+  - DTOs และ Consistent API Responses
+  - Swagger Documentation
+
+👉 **[ดูคู่มือโปรเจค ProductsAPI ฉบับเต็ม](./ProductsAPI/README-GUIDE.md)**
+
+---
+
 ## 7.1 RESTful API คืออะไร
 
 REST (Representational State Transfer) เป็น architectural style สำหรับ Web Services
